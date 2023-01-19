@@ -7,6 +7,16 @@ type UserResponse struct {
 	Image string `json:"image" form:"image" validate:"required"`
 }
 
+type UserGetResponse struct {
+	ID      int    `json:"id"`
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Image   string `json:"image"`
+	Phone   string `json:"phone"`
+	PosCode string `json:"pos_code"`
+	Address string `json:"address"`
+}
+
 type UserUpdateResponse struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name" form:"name" validate:"required"`

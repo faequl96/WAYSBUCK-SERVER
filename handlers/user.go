@@ -65,30 +65,25 @@ func (h *handlerUser) HandlerGetUsers(w http.ResponseWriter, r *http.Request) {
 func (h *handlerUser) HandlerGetUserByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	id, _ := strconv.Atoi(mux.Vars(r)["id"])
-
 	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
-	userRole := userInfo["role"]
 	userId := int(userInfo["id"].(float64))
 
-	if userId != id && userRole != "admin" {
-		w.WriteHeader(http.StatusUnauthorized)
-		response := dto.ErrorResult{Code: http.StatusUnauthorized, Message: "To show this data user, you must login as Admin or login with this user account!"}
+	user, err := h.UserRepository.RepoGetUserByID(userId)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
 		json.NewEncoder(w).Encode(response)
 		return
 	}
 
-	userFromDB, err := h.UserRepository.RepoGetUserByID(id)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(err.Error())
-	}
-
-	UserResponse := userdto.UserResponse{
-		ID:    userFromDB.ID,
-		Name:  userFromDB.Name,
-		Email: userFromDB.Email,
-		Image: userFromDB.Image,
+	UserResponse := userdto.UserGetResponse{
+		ID:      user.ID,
+		Name:    user.Name,
+		Email:   user.Email,
+		Image:   user.Image,
+		Phone:   user.Phone,
+		PosCode: user.PosCode,
+		Address: user.Address,
 	}
 
 	w.WriteHeader(http.StatusOK)

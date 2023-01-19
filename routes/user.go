@@ -14,7 +14,7 @@ func UserRoutes(r *mux.Router) {
 	h := handlers.HandlerUser(userRepository)
 
 	r.HandleFunc("/users", middleware.Auth(h.HandlerGetUsers)).Methods("GET")
-	r.HandleFunc("/user/{id}", middleware.Auth(h.HandlerGetUserByID)).Methods("GET")
+	r.HandleFunc("/user", middleware.Auth(h.HandlerGetUserByID)).Methods("GET")
 	r.HandleFunc("/user/{id}", middleware.Auth(middleware.UploadFile(h.HandlerUpdateUser))).Methods("PATCH")
 	r.HandleFunc("/user/{id}", middleware.Auth(h.HandlerDeleteUser)).Methods("DELETE")
 }
