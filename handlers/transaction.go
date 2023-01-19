@@ -68,16 +68,17 @@ func (h *handlerTransaction) HandlerCreateTransaction(w http.ResponseWriter, r *
 	idTrans := time.Unix()
 
 	dataTransaction := models.Transaction{
-		ID:         int(idTrans),
-		Name:       request.Name,
-		Email:      request.Email,
-		Phone:      request.Phone,
-		PosCode:    request.PosCode,
-		Address:    request.Address,
-		TotalPrice: request.TotalPrice,
-		Status:     request.Status,
-		Carts:      UserCart,
-		CustomerID: customerID,
+		ID:            int(idTrans),
+		Name:          request.Name,
+		Email:         request.Email,
+		RecepientName: request.RecepientName,
+		Phone:         request.Phone,
+		PosCode:       request.PosCode,
+		Address:       request.Address,
+		TotalPrice:    request.TotalPrice,
+		Status:        request.Status,
+		Carts:         UserCart,
+		CustomerID:    customerID,
 	}
 
 	newTrans, err := h.TransactionRepository.RepoCheckout(dataTransaction)

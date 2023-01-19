@@ -1,14 +1,15 @@
 package models
 
 type Transaction struct {
-	ID         int    `json:"id"`
-	Name       string `json:"name"`
-	Email      string `json:"email"`
-	Phone      string `json:"phone"`
-	PosCode    string `json:"pos_code"`
-	Address    string `json:"address"`
-	TotalPrice int    `json:"total_price"`
-	Status     string `json:"status"`
+	ID            int    `json:"id"`
+	Name          string `json:"name"`
+	Email         string `json:"email"`
+	RecepientName string `json:"recepient_name"`
+	Phone         string `json:"phone"`
+	PosCode       string `json:"pos_code"`
+	Address       string `json:"address"`
+	TotalPrice    int    `json:"total_price"`
+	Status        string `json:"status"`
 
 	CustomerID int          `json:"customer_id"`
 	Customer   UserResponse `json:"customer"`
