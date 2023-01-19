@@ -15,9 +15,12 @@ type RegisterResponse struct {
 }
 
 type CheckAuthResponse struct {
-	Id    int    `gorm:"type: int" json:"id"`
-	Name  string `gorm:"type: varchar(255)" json:"name"`
-	Email string `gorm:"type: varchar(255)" json:"email"`
-	Role  string `gorm:"type: varchar(55)"  json:"role"`
-	Image string `json:"image"`
+	Id      int    `gorm:"type: int" json:"id"`
+	Name    string `gorm:"type: varchar(255)" json:"name"`
+	Email   string `gorm:"type: varchar(255)" json:"email"`
+	Role    string `gorm:"type: varchar(55)"  json:"role"`
+	Image   string `json:"image"`
+	Phone   string `json:"phone"`
+	PosCode string `json:"pos_code"`
+	Address string `json:"address"`
 }

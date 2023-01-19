@@ -108,9 +108,12 @@ func (h *handlerUser) HandlerUpdateUser(w http.ResponseWriter, r *http.Request) 
 	var API_SECRET = os.Getenv("CLOUD_API_SECRET")
 
 	request := userdto.UserUpdateRequest{
-		Name:  r.FormValue("name"),
-		Email: r.FormValue("email"),
-		Image: filename,
+		Name:    r.FormValue("name"),
+		Email:   r.FormValue("email"),
+		Image:   filename,
+		Phone:   r.FormValue("phone"),
+		PosCode: r.FormValue("pos_code"),
+		Address: r.FormValue("address"),
 	}
 
 	validation := validator.New()
@@ -165,6 +168,15 @@ func (h *handlerUser) HandlerUpdateUser(w http.ResponseWriter, r *http.Request) 
 	if filename != "false" {
 		user.Image = resp.SecureURL
 	}
+	if request.Phone != "" {
+		user.Phone = request.Phone
+	}
+	if request.PosCode != "" {
+		user.PosCode = request.PosCode
+	}
+	if request.Address != "" {
+		user.Address = request.Address
+	}
 
 	data, err := h.UserRepository.RepoUpdateUser(user)
 	if err != nil {
@@ -175,10 +187,13 @@ func (h *handlerUser) HandlerUpdateUser(w http.ResponseWriter, r *http.Request) 
 	}
 
 	UserResponse := userdto.UserUpdateResponse{
-		ID:    data.ID,
-		Name:  data.Name,
-		Email: data.Email,
-		Image: data.Image,
+		ID:      data.ID,
+		Name:    data.Name,
+		Email:   data.Email,
+		Image:   data.Image,
+		Phone:   data.Phone,
+		PosCode: data.PosCode,
+		Address: data.Address,
 	}
 
 	w.WriteHeader(http.StatusOK)

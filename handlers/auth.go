@@ -151,11 +151,14 @@ func (h *handlerAuth) HandlerCheckAuth(w http.ResponseWriter, r *http.Request) {
 	}
 
 	CheckAuthResponse := authdto.CheckAuthResponse{
-		Id:    user.ID,
-		Name:  user.Name,
-		Email: user.Email,
-		Role:  user.Role,
-		Image: user.Image,
+		Id:      user.ID,
+		Name:    user.Name,
+		Email:   user.Email,
+		Role:    user.Role,
+		Image:   user.Image,
+		Phone:   user.Phone,
+		PosCode: user.PosCode,
+		Address: user.Address,
 	}
 
 	w.WriteHeader(http.StatusOK)

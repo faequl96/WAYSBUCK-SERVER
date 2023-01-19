@@ -9,6 +9,9 @@ type User struct {
 	Password  string    `json:"password" gorm:"type: varchar(255)"`
 	Image     string    `json:"image" gorm:"type: varchar(255)"`
 	Role      string    `json:"role" gorm:"type: varchar(55)"`
+	Phone     string    `json:"phone" gorm:"type: varchar(55)"`
+	PosCode   string    `json:"pos_code" gorm:"type: varchar(55)"`
+	Address   string    `json:"address" gorm:"type: varchar(255)"`
 	CreatedAt time.Time `json:"-"`
 	UpdatedAt time.Time `json:"-"`
 }
