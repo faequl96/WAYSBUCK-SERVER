@@ -55,7 +55,11 @@ func (h *handlerCart) HandlerAddCart(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	toppings, err := h.CartRepository.RepoGetToppingCart(request.ToppingsID)
+	var toppings []models.Topping
+
+	if len(request.ToppingsID) != 0 {
+		toppings, err = h.CartRepository.RepoGetToppingCart(request.ToppingsID)
+	}
 
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
