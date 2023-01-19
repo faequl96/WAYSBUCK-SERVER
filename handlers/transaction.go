@@ -194,18 +194,18 @@ func (h *handlerTransaction) Notification(w http.ResponseWriter, r *http.Request
 
 	if transactionStatus == "capture" {
 		if fraudStatus == "challenge" {
-			h.TransactionRepository.UpdateTransactionUser("pending", transaction.ID)
+			h.TransactionRepository.UpdateTransactionUser("Pending", transaction.ID)
 		} else if fraudStatus == "accept" {
-			h.TransactionRepository.UpdateTransactionUser("success", transaction.ID)
+			h.TransactionRepository.UpdateTransactionUser("Success", transaction.ID)
 		}
 	} else if transactionStatus == "settlement" {
-		h.TransactionRepository.UpdateTransactionUser("success", transaction.ID)
+		h.TransactionRepository.UpdateTransactionUser("Success", transaction.ID)
 	} else if transactionStatus == "deny" {
-		h.TransactionRepository.UpdateTransactionUser("failed", transaction.ID)
+		h.TransactionRepository.UpdateTransactionUser("Failed", transaction.ID)
 	} else if transactionStatus == "cancel" || transactionStatus == "expire" {
-		h.TransactionRepository.UpdateTransactionUser("failed", transaction.ID)
+		h.TransactionRepository.UpdateTransactionUser("Failed", transaction.ID)
 	} else if transactionStatus == "pending" {
-		h.TransactionRepository.UpdateTransactionUser("pending", transaction.ID)
+		h.TransactionRepository.UpdateTransactionUser("Pending", transaction.ID)
 	}
 
 	w.WriteHeader(http.StatusOK)
