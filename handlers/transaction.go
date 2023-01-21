@@ -177,6 +177,7 @@ func (h *handlerTransaction) HandlerGetTransactions(w http.ResponseWriter, r *ht
 func (h *handlerTransaction) HandlerDeleteTransaction(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("content-type", "application/json")
 
+	fmt.Println("tes")
 	request := new(transactiondto.DeleteTransactionRequest)
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
