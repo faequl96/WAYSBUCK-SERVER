@@ -174,6 +174,32 @@ func (h *handlerTransaction) HandlerGetTransactions(w http.ResponseWriter, r *ht
 	}
 }
 
+func (h *handlerTransaction) HandlerDeleteTransaction(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "application/json")
+
+	request := new(transactiondto.DeleteTransactionRequest)
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
+		json.NewEncoder(w).Encode(response)
+		return
+	}
+
+	if len(request.ID) != 0 {
+		data, err := h.TransactionRepository.RepoDeleteTransaction(request.ID)
+
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			response := dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()}
+			json.NewEncoder(w).Encode(response)
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+		response := dto.SuccessResult{Code: http.StatusOK, Data: data}
+		json.NewEncoder(w).Encode(response)
+	}
+}
+
 func (h *handlerTransaction) Notification(w http.ResponseWriter, r *http.Request) {
 	var notificationPayload map[string]interface{}
 

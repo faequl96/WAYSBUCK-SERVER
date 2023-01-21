@@ -11,3 +11,7 @@ type CheckoutRequest struct {
 	Status        string `json:"status" form:"status"`
 	CartID        []int  `json:"cart_id" form:"cart_id"`
 }
+
+type DeleteTransactionRequest struct {
+	ID []int `json:"id" form:"id"`
+}
