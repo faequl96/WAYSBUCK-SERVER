@@ -185,6 +185,8 @@ func (h *handlerTransaction) HandlerDeleteTransaction(w http.ResponseWriter, r *
 		return
 	}
 
+	fmt.Println(request)
+
 	if len(request.ID) != 0 {
 		data, err := h.TransactionRepository.RepoDeleteTransaction(request.ID)
 
