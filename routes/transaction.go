@@ -14,7 +14,7 @@ func TransactionRoutes(r *mux.Router) {
 	h := handlers.HandlerTransaction(transactionRepository)
 	r.HandleFunc("/create-transaction", middleware.Auth(h.HandlerCreateTransaction)).Methods("POST")
 	r.HandleFunc("/transaction", middleware.Auth(h.HandlerGetTransactionByIdUser)).Methods("GET")
-	r.HandleFunc("/delete-transaction", middleware.Auth(h.HandlerDeleteTransaction)).Methods("DELETE")
+	r.HandleFunc("/delete-transaction", middleware.Auth(h.HandlerDeleteTransaction)).Methods("POST")
 	r.HandleFunc("/transactions", middleware.Auth(h.HandlerGetTransactions)).Methods("GET")
 	r.HandleFunc("/notification", h.Notification).Methods("POST")
 }
