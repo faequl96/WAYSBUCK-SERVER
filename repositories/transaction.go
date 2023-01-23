@@ -42,7 +42,7 @@ func (r *repository) RepoGetTransactionByIdUser(ID int) ([]models.Transaction, e
 
 func (r *repository) RepoGetTransactions() ([]models.Transaction, error) {
 	var transactions []models.Transaction
-	err := r.db.Find(&transactions).Error
+	err := r.db.Preload("Carts").Preload("Carts.Product").Preload("Carts.Toppings").Order("id desc").Find(&transactions).Error
 
 	return transactions, err
 }
